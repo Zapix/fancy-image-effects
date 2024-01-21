@@ -1,7 +1,7 @@
 mod utils;
 
 use wasm_bindgen::prelude::*;
-use web_sys::HtmlDivElement;
+use web_sys::{HtmlDivElement};
 
 #[wasm_bindgen]
 extern "C" {
@@ -24,7 +24,17 @@ struct Application {
 
 #[wasm_bindgen]
 impl Application {
-    pub fn new(container: HtmlDivElement) -> Self {
+    pub async fn new(container: HtmlDivElement) -> Self {
+        let window = web_sys::window().expect("Window does not exist");
+        let document = window.document().expect("Can not get document");
+        let width = container.client_width();
+        let height = container.client_height();
+
+        let canvas = document.create_element("canvas").expect("Can not create canvas");
+        let style_string = format!("width: {}px; height: {}px", width, height);
+        canvas.set_attribute("style", &style_string.as_str()).unwrap();
+        container.append_child(&canvas).unwrap();
+
         let value = 0.0 as f32;
         Self {
             container,
@@ -37,9 +47,9 @@ impl Application {
     }
 
     pub fn render(&mut self) {
-        let message = format!("Value: {:.3}", self.value);
-        self.container.set_text_content(
-            Some(&message.as_str())
-        );
+        // let message = format!("Value: {:.3}", self.value);
+        // self.container.set_text_content(
+        //     Some(&message.as_str())
+        // );
     }
 }
