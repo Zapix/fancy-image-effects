@@ -9,13 +9,9 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn greet(name: String) {
-    let message = format!("Hello, {}", name.as_str());
-    alert(message.as_str());
-}
-
-#[wasm_bindgen]
-pub fn render_greet(name: String, container: &HtmlDivElement) {
-    let message = format!("Rust says: {}", name.as_str());
+pub fn render_canvas(container: &HtmlDivElement) {
+    let width = container.client_width();
+    let height = container.client_height();
+    let message = format!("Container size: {}x{}", width, height);
     container.set_text_content(Some(&message.as_str()));
 }

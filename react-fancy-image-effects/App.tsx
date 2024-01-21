@@ -1,5 +1,5 @@
 import * as React from "react";
-import { render_greet } from 'fancy-image-effects';
+import { render_canvas } from 'fancy-image-effects';
 
 const WIDTH= 512;
 const HEIGHT = 512;
@@ -9,7 +9,7 @@ function App() {
     React.useEffect(() => {
         const { current } = ref;
         if (current !== null) {
-            render_greet("Hello World", current);
+            render_canvas(current);
         }
     }, []);
 
