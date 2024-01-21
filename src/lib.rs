@@ -9,13 +9,37 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn greet(name: String) {
-    let message = format!("Hello, {}", name.as_str());
-    alert(message.as_str());
+pub fn render_canvas(container: HtmlDivElement) {
+    let width = container.client_width();
+    let height = container.client_height();
+    let message = format!("Container size: {}x{}", width, height);
+    container.set_text_content(Some(&message.as_str()));
 }
 
 #[wasm_bindgen]
-pub fn render_greet(name: String, container: &HtmlDivElement) {
-    let message = format!("Rust says: {}", name.as_str());
-    container.set_text_content(Some(&message.as_str()));
+struct Application {
+    container: HtmlDivElement,
+    value: f32,
+}
+
+#[wasm_bindgen]
+impl Application {
+    pub fn new(container: HtmlDivElement) -> Self {
+        let value = 0.0 as f32;
+        Self {
+            container,
+            value
+        }
+    }
+
+    pub fn set_value(&mut self, value: f32) {
+        self.value = value;
+    }
+
+    pub fn render(&mut self) {
+        let message = format!("Value: {:.3}", self.value);
+        self.container.set_text_content(
+            Some(&message.as_str())
+        );
+    }
 }
