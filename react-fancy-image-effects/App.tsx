@@ -13,7 +13,9 @@ function App() {
     React.useEffect(() => {
         const { current } = ref;
         if (current !== null) {
-            applicationRef.current = Application.new(current);
+            Application.new(current).then((application) => {
+                applicationRef.current = application;
+            });
         }
     }, []);
 
@@ -41,9 +43,7 @@ function App() {
 
     return (
         <>
-            <div ref={ref} style={{width: WIDTH, height: HEIGHT}}>
-                Hello React
-            </div>
+            <div ref={ref} style={{width: WIDTH, height: HEIGHT}} />
             <div>
                 <input
                     type="range"
