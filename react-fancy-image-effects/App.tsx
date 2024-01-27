@@ -1,5 +1,7 @@
 import * as React from "react";
-import { Application } from 'fancy-image-effects';
+import { Application } from "fancy-image-effects";
+
+import image from './images/img_5300.jpg';
 
 const WIDTH= 512;
 const HEIGHT = 512;
@@ -13,7 +15,7 @@ function App() {
     React.useEffect(() => {
         const { current } = ref;
         if (current !== null) {
-            Application.new(current).then((application) => {
+            Application.new(current, image).then((application) => {
                 applicationRef.current = application;
             });
         }

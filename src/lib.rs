@@ -1,9 +1,12 @@
 mod utils;
+mod loader;
 use std::borrow::Cow;
 
 use wasm_bindgen::prelude::*;
 use web_sys::{HtmlCanvasElement, HtmlDivElement};
 use wgpu::util::DeviceExt;
+
+use loader::fetch_image;
 
 const CELLS_SIZE: i32 = 32;
 
@@ -35,12 +38,14 @@ struct Application {
 
 #[wasm_bindgen]
 impl Application {
-    pub async fn new(container: web_sys::HtmlDivElement) -> Self {
+    pub async fn new(container: web_sys::HtmlDivElement, image_url: String) -> Self {
         let value = 0.0 as f32;
         let window = web_sys::window().expect("Window does not exist");
         let document = window.document().expect("Can not get document");
         let width = container.client_width() as u32;
         let height = container.client_height() as u32;
+
+        let image = fetch_image(image_url.as_str()).await.expect("Can not load image");
 
         let canvas = document
             .create_element("canvas")
