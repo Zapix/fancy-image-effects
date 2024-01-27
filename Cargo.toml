@@ -21,13 +21,24 @@ console_error_panic_hook = { version = "0.1.7", optional = true }
 wgpu = {  version = "0.18.0", features = ["webgl"]}
 bytemuck = { version = "1.14.0", features=["derive"]}
 
+[dependencies.image]
+version = "0.24.8"
+default-features = false
+features = ["png", "jpeg"]
+
 [dependencies.web-sys]
 version = "0.3.64"
 features = [
     "Document",
     "Window",
     "HtmlCanvasElement",
-    "HtmlDivElement"
+    "HtmlDivElement",
+    'Headers',
+    'Request',
+    'RequestInit',
+    'RequestMode',
+    'Response',
+    'console',
 ]
 
 [dev-dependencies]
