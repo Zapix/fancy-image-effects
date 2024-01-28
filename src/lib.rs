@@ -1,12 +1,14 @@
+extern crate console_error_panic_hook;
 mod utils;
 mod loader;
 use std::borrow::Cow;
 
 use image::{DynamicImage, GenericImageView, image_dimensions};
 use wasm_bindgen::prelude::*;
-use web_sys::{HtmlCanvasElement, HtmlDivElement};
+use web_sys::{HtmlCanvasElement, HtmlDivElement, console};
 use wgpu::util::DeviceExt;
 
+use utils::set_panic_hook;
 use loader::fetch_image;
 
 const CELLS_SIZE: i32 = 32;
@@ -31,9 +33,13 @@ struct Application {
     queue: wgpu::Queue,
     resolution_buffer: wgpu::Buffer,
     resolution_bind_group: wgpu::BindGroup,
+    texture_size: wgpu::Extent3d,
+    texture_bind_group_layout: wgpu::BindGroupLayout,
     texture_bind_group: wgpu::BindGroup,
     render_pipeline: wgpu::RenderPipeline,
-    image: DynamicImage,
+    image_url: String,
+    image: Option<DynamicImage>,
+    diffuse_texture: wgpu::Texture,
     container: HtmlDivElement,
 
     value: f32,
@@ -42,6 +48,9 @@ struct Application {
 #[wasm_bindgen]
 impl Application {
     pub async fn new(container: web_sys::HtmlDivElement, image_url: String) -> Self {
+        std::panic::set_hook(Box::new(console_error_panic_hook::hook));
+        set_panic_hook();
+
         let value = 0.0 as f32;
         let window = web_sys::window().expect("Window does not exist");
         let document = window.document().expect("Can not get document");
@@ -139,8 +148,8 @@ impl Application {
         let (image_width, image_height)= image.dimensions();
         let image_rgba = image.to_rgba8();
         let texture_size = wgpu::Extent3d {
-            width: image_width,
-            height: image_height,
+            width: width,
+            height: height,
             depth_or_array_layers: 1,
         };
         let diffuse_texture = device.create_texture(
@@ -261,10 +270,14 @@ impl Application {
             queue,
             resolution_buffer,
             resolution_bind_group,
+            texture_size,
+            texture_bind_group_layout,
             texture_bind_group,
+            diffuse_texture,
             render_pipeline,
             container,
-            image,
+            image_url,
+            image: Some(image),
 
             value,
         }
@@ -282,7 +295,30 @@ impl Application {
         );
     }
 
-    pub fn render(&mut self) {
+    pub async fn set_image(&self, image_url: String) {
+        console::log_1(&format!("Load image: {}", {image_url.as_str()}).as_str().into());
+        let image = fetch_image(image_url.as_str()).await.expect("Can not load image");
+        let image_rgba = image.to_rgba8();
+        let (image_width, image_height) = image.dimensions();
+        self.queue.write_texture(
+            wgpu::ImageCopyTexture {
+                texture: &self.diffuse_texture,
+                mip_level: 0,
+                origin: wgpu::Origin3d::ZERO,
+                aspect: wgpu::TextureAspect::All,
+            },
+            &image_rgba,
+            wgpu::ImageDataLayout {
+                offset: 0,
+                bytes_per_row: Some(4 * image_width),
+                rows_per_image: Some(image_height),
+            },
+            self.texture_size
+        );
+        self.render();
+    }
+
+    pub fn render(&self) {
         let frame = self
             .surface
             .get_current_texture()
