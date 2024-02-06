@@ -6,6 +6,7 @@ import image2 from './images/IMG_5301.jpg';
 import image3 from './images/IMG_5302.jpg';
 import image4 from './images/IMG_5303.jpg';
 import image5 from './images/IMG_5304.jpg';
+import FancyImage from "./src/FancyImage";
 
 const WIDTH= 512;
 const HEIGHT = 512;
@@ -14,54 +15,9 @@ function App() {
     const [value, setValue] = React.useState(0.0);
     const [image, setImage] = React.useState<string>(image3);
 
-    const ref = React.useRef<HTMLDivElement | null>(null);
-    const applicationRef = React.useRef<Application | null>(null);
-    const frameRef = React.useRef<number | null>();
-    React.useEffect(() => {
-        const { current } = ref;
-        if (current !== null) {
-            Application.new(current, image).then((application) => {
-                applicationRef.current = application;
-                application.render();
-            });
-        }
-    }, []);
-
-    React.useEffect(() => {
-        frameRef.current = requestAnimationFrame(() => {
-            let { current: application } = applicationRef;
-            if (application !== null) {
-                console.log("Render application");
-                application.render();
-            }
-        });
-        return () => {
-            const { current: frameRequestId } = frameRef;
-            if (frameRequestId) {
-                cancelAnimationFrame(frameRequestId);
-            }
-        }
-    });
-
-    React.useEffect(() => {
-        let { current: application } = applicationRef;
-        if (application !== null) {
-            application.set_value(value);
-        }
-    }, [value]);
-
-    React.useEffect(() => {
-        let { current: application } = applicationRef;
-        if (application !== null) {
-            application.set_image(image).then(() => {
-                application.render();
-            });
-        }
-    }, [image]);
-
     return (
         <>
-            <div ref={ref} style={{width: WIDTH, height: HEIGHT}} />
+            <FancyImage width={WIDTH} height={HEIGHT} src={image} value={value} />
             <div>
                 <input
                     type="range"
