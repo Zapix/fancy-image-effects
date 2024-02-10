@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import { Application } from 'fancy-image-effects';
+import {Application, ImageShader} from 'fancy-image-effects';
 
 export type FancyImageProps = {
     width: number,
     height: number,
+    shader: ImageShader,
     src: string,
     value: number,
 };
@@ -19,7 +20,7 @@ export default function FancyImage(props: FancyImageProps) {
         const { current } = ref;
         if (current !== null) {
             const { src } = props;
-            Application.new(current, src).then(application => {
+            Application.new(current, props.shader, src).then(application => {
                 applicationRef.current = application;
                 application.render();
             });

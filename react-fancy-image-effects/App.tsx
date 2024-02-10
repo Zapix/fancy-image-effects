@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Application } from "fancy-image-effects";
+import { ImageShader } from 'fancy-image-effects';
 
 import image1 from './images/img_5300.jpg';
 import image2 from './images/IMG_5301.jpg';
@@ -17,7 +17,7 @@ function App() {
 
     return (
         <>
-            <FancyImage width={WIDTH} height={HEIGHT} src={image} value={value} />
+            <FancyImage width={WIDTH} shader={ImageShader.CellFade} height={HEIGHT} src={image} value={value} />
             <div>
                 <input
                     type="range"
