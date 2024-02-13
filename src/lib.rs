@@ -54,7 +54,7 @@ struct Application {
 fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
     match image_shader {
         ImageShader::SimpleFade => Cow::Borrowed(include_str!("simple-fade.wgsl")),
-        ImageShader::CellFade => Cow::Borrowed(include_str!("simple-fade.wgsl")),
+        ImageShader::CellFade => Cow::Borrowed(include_str!("cell-fade.wgsl")),
     }
 }
 
