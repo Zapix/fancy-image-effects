@@ -27,6 +27,12 @@ pub fn render_canvas(container: HtmlDivElement) {
 }
 
 #[wasm_bindgen]
+pub enum ImageShader {
+    SimpleFade,
+    CellFade,
+}
+
+#[wasm_bindgen]
 struct Application {
     surface: wgpu::Surface,
     device: wgpu::Device,
@@ -45,9 +51,16 @@ struct Application {
     value: f32,
 }
 
+fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
+    match image_shader {
+        ImageShader::SimpleFade => Cow::Borrowed(include_str!("simple-fade.wgsl")),
+        ImageShader::CellFade => Cow::Borrowed(include_str!("cell-fade.wgsl")),
+    }
+}
+
 #[wasm_bindgen]
 impl Application {
-    pub async fn new(container: web_sys::HtmlDivElement, image_url: String) -> Self {
+    pub async fn new(container: web_sys::HtmlDivElement, image_shader: ImageShader, image_url: String) -> Self {
         std::panic::set_hook(Box::new(console_error_panic_hook::hook));
         set_panic_hook();
 
@@ -242,7 +255,7 @@ impl Application {
 
         let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: None,
-            source: wgpu::ShaderSource::Wgsl(Cow::Borrowed(include_str!("shader.wgsl"))),
+            source: wgpu::ShaderSource::Wgsl(get_shader(image_shader)),
         });
 
         let render_pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
