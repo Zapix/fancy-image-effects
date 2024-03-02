@@ -13,11 +13,19 @@ const HEIGHT = 512;
 
 function App() {
     const [value, setValue] = React.useState(0.0);
+    const [reversed, setReversed] = React.useState(false);
     const [image, setImage] = React.useState<string>(image3);
 
     return (
         <>
-            <FancyImage width={WIDTH} shader={ImageShader.CellFade} height={HEIGHT} src={image} value={value} />
+            <FancyImage
+                width={WIDTH}
+                height={HEIGHT}
+                shader={ImageShader.CellFade}
+                src={image}
+                value={value}
+                reversed={reversed}
+            />
             <div>
                 <input
                     type="range"
@@ -27,6 +35,11 @@ function App() {
                     onChange={(e) => {setValue(+e.target.value);}}
                     step="any"
                 />
+            </div>
+            <div>
+                <label><input type="checkbox" value={reversed ? "checked" : ""} onChange={(e) => {
+                    setReversed(e.target.checked);
+                }} />Reversed</label>
             </div>
             <div>
                 <select value={image} onChange={(e) => setImage(e.target.value)}>

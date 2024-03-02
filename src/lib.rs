@@ -45,6 +45,7 @@ struct Application {
     render_pipeline: wgpu::RenderPipeline,
     image_url: String,
     image: Option<DynamicImage>,
+    reversed: bool,
     diffuse_texture: wgpu::Texture,
     container: HtmlDivElement,
 
@@ -60,7 +61,7 @@ fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
 
 #[wasm_bindgen]
 impl Application {
-    pub async fn new(container: web_sys::HtmlDivElement, image_shader: ImageShader, image_url: String) -> Self {
+    pub async fn new(container: web_sys::HtmlDivElement, image_shader: ImageShader, image_url: String, reversed: bool) -> Self {
         std::panic::set_hook(Box::new(console_error_panic_hook::hook));
         set_panic_hook();
 
@@ -290,22 +291,41 @@ impl Application {
             render_pipeline,
             container,
             image_url,
+            reversed,
             image: Some(image),
 
             value,
         }
     }
-
-    pub fn set_value(&mut self, value: f32) {
-        self.value = value;
+    fn  write_to_buffer(&self) {
         let width = self.container.client_width() as f32;
         let height = self.container.client_height() as f32;
-        let resolution_arr = [width as f32, height as f32, CELLS_SIZE as f32, value];
+        let resolution_arr = [
+            width as f32,
+            height as f32,
+            if self.reversed {
+                1.0
+            } else {
+                0.0
+            },
+            self.value
+        ];
         self.queue.write_buffer(
             &self.resolution_buffer,
             0,
             bytemuck::cast_slice(&resolution_arr),
         );
+    }
+
+    pub fn set_value(&mut self, value: f32) {
+        self.value = value;
+        self.write_to_buffer();
+    }
+
+    pub fn set_reversed(&mut self, value: bool) {
+        self.reversed = value;
+        console::log_1(&format!("Rendering reversed: {}", self.reversed).as_str().into());
+        self.write_to_buffer();
     }
 
     pub async fn set_image(&self, image_url: String) {

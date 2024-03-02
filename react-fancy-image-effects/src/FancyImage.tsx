@@ -1,11 +1,13 @@
 import * as React from 'react';
 
 import {Application, ImageShader} from 'fancy-image-effects';
+import app from "../App";
 
 export type FancyImageProps = {
     width: number,
     height: number,
     shader: ImageShader,
+    reversed: boolean,
     src: string,
     value: number,
 };
@@ -19,8 +21,8 @@ export default function FancyImage(props: FancyImageProps) {
     React.useEffect(() => {
         const { current } = ref;
         if (current !== null) {
-            const { src } = props;
-            Application.new(current, props.shader, src).then(application => {
+            const { src, shader, reversed } = props;
+            Application.new(current, shader, src, reversed).then(application => {
                 applicationRef.current = application;
                 application.render();
             });
@@ -45,6 +47,10 @@ export default function FancyImage(props: FancyImageProps) {
 
         if (prevProps.value !== props.value) {
             application.set_value(props.value);
+        }
+
+        if (prevProps.reversed !== props.reversed) {
+            application.set_reversed(props.reversed);
         }
 
         if (prevProps.src !== props.src) {
