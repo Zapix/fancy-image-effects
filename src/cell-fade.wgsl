@@ -1,7 +1,7 @@
 struct ResolutionUniform {
     width: f32,
     height: f32,
-    cell_size: f32, // minimum binding size should be 16 bytes
+    reversed: f32,
     value: f32,
 }
 
@@ -48,6 +48,9 @@ fn vs_main(@builtin(vertex_index) index: u32) -> VertexOutput {
 fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
     var cell = floor(vec2<f32>(in.texcoord.x * 10.0, in.texcoord.y * 10.0));
     var cell_num = cell.y * 10.0 + cell.x;
+    if (resolution.reversed != 0.0) {
+        cell_num = 99.0 - cell_num;
+    }
     var resolution_value = resolution.value * 100.0;
     if (cell_num > resolution_value) {
         return vec4<f32>(textureSample(t_diffuse, s_diffuse, in.texcoord).rgb, 0.0);
