@@ -30,10 +30,10 @@ pub fn render_canvas(container: HtmlDivElement) {
 pub enum ImageShader {
     SimpleFade,
     CellFade,
+    RowFade,
 }
 
-#[wasm_bindgen]
-struct Application {
+#[wasm_bindgen] struct Application {
     surface: wgpu::Surface,
     device: wgpu::Device,
     queue: wgpu::Queue,
@@ -56,6 +56,7 @@ fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
     match image_shader {
         ImageShader::SimpleFade => Cow::Borrowed(include_str!("simple-fade.wgsl")),
         ImageShader::CellFade => Cow::Borrowed(include_str!("cell-fade.wgsl")),
+        ImageShader::RowFade => Cow::Borrowed(include_str!("row-fade.wgsl")),
     }
 }
 
