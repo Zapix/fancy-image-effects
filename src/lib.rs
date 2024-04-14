@@ -31,6 +31,7 @@ pub enum ImageShader {
     SimpleFade,
     CellFade,
     RowFade,
+    ColFade,
 }
 
 #[wasm_bindgen] struct Application {
@@ -57,6 +58,7 @@ fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
         ImageShader::SimpleFade => Cow::Borrowed(include_str!("simple-fade.wgsl")),
         ImageShader::CellFade => Cow::Borrowed(include_str!("cell-fade.wgsl")),
         ImageShader::RowFade => Cow::Borrowed(include_str!("row-fade.wgsl")),
+        ImageShader::ColFade => Cow::Borrowed(include_str!("col-fade.wgsl")),
     }
 }
 
