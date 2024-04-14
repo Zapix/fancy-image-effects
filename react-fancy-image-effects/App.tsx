@@ -21,7 +21,7 @@ function App() {
             <FancyImage
                 width={WIDTH}
                 height={HEIGHT}
-                shader={ImageShader.RowFade}
+                shader={ImageShader.ColFade}
                 src={image}
                 value={value}
                 reversed={reversed}
