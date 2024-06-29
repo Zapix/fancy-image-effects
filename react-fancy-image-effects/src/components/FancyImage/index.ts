@@ -1,0 +1,1 @@
+export { FancyImage } from './FancyImage';

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {Application, ImageShader} from 'fancy-image-effects';
-import app from "../App";
 
 export type FancyImageProps = {
     width: number,
@@ -12,7 +11,7 @@ export type FancyImageProps = {
     value: number,
 };
 
-export default function FancyImage(props: FancyImageProps) {
+export function FancyImage(props: FancyImageProps) {
     const prevPropsRef = React.useRef<FancyImageProps | null>(null);
     const ref = React.useRef<HTMLDivElement | null>(null);
     const applicationRef = React.useRef<Application | null>(null);
