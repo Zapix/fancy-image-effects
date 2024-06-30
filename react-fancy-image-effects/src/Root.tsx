@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
+import { Outlet } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
 
-import { Layout } from './src/layout';
-import { AppMenu, FadeColumnExample } from './src/components';
+import { Layout } from './layout';
+import { AppMenu } from "./components";
 
-
-function App() {
+export const Root = () => {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CssBaseline />
@@ -13,11 +13,9 @@ function App() {
                 renderMenu={AppMenu}
             >
                 <Box sx={{ grow: 1 }}>
-                    <FadeColumnExample />
+                    <Outlet />
                 </Box>
             </Layout>
         </Box>
     );
 }
-
-export default App;

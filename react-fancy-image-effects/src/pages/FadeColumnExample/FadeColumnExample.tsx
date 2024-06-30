@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Box, Slider} from '@mui/material';
-import { FancyImage } from '../FancyImage';
+import { FancyImage } from '../../components/FancyImage';
 
 import image1 from '../../../images/img_5300.jpg';
 import image2 from '../../../images/IMG_5301.jpg';
@@ -68,7 +68,6 @@ export const FadeColumnExample = () => {
                     <option value={image5}>Sherri 5</option>
                 </select>
             </Box>
-
         </Box>
     );
 };
