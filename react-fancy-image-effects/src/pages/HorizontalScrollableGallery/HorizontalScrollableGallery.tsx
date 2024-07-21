@@ -16,13 +16,16 @@ export function HorizontalScrollableGallery() {
         <Box
             sx={{
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
             }}
         >
-            <Typography variant="h1">Horizontal Gallery</Typography>
+            <Typography variant="h2" sx={{ mb: 4 }}>Horizontal Gallery</Typography>
             <Box
                 sx={{
-                    mx: 8
+                    px: 8,
+                    width: '100%',
                 }}
             >
                 <HorizontalGallery
