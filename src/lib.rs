@@ -64,11 +64,10 @@ fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
 
 #[wasm_bindgen]
 impl Application {
-    pub async fn new(container: web_sys::HtmlDivElement, image_shader: ImageShader, image_url: String, reversed: bool) -> Self {
+    pub async fn new(container: web_sys::HtmlDivElement, image_shader: ImageShader, image_url: String, reversed: bool, value: f32) -> Self {
         std::panic::set_hook(Box::new(console_error_panic_hook::hook));
         set_panic_hook();
 
-        let value = 0.0 as f32;
         let window = web_sys::window().expect("Window does not exist");
         let document = window.document().expect("Can not get document");
         let width = container.client_width() as u32;

@@ -20,8 +20,8 @@ export function FancyImage(props: FancyImageProps) {
     React.useEffect(() => {
         const { current } = ref;
         if (current !== null) {
-            const { src, shader, reversed } = props;
-            Application.new(current, shader, src, reversed).then(application => {
+            const { src, shader, reversed , value} = props;
+            Application.new(current, shader, src, reversed, value).then(application => {
                 applicationRef.current = application;
                 application.render();
             });
