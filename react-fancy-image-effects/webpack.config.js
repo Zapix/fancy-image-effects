@@ -36,5 +36,8 @@ module.exports = {
   ],
   experiments: {
     syncWebAssembly: true,
+  },
+  devServer: {
+    historyApiFallback: true,
   }
 };

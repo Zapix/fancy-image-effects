@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { Root } from './Root';
-import { Home, FadeColumnExample, HorizontalScrollableGallery } from './pages';
+import {
+    Home,
+    FadeColumnExample,
+    HorizontalScrollableGallery,
+    HorizontalGreyScrollExample,
+    VerticalGreyScrollExample,
+} from './pages';
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +21,18 @@ export const router = createBrowserRouter([
             {
                 path: "fade-by-column",
                 element: <FadeColumnExample />
+            },
+            {
+                path: "vertical-grey-scroll",
+                element: <VerticalGreyScrollExample />,
+            },
+            {
+                path: "horizontal-grey-scroll",
+                element: <HorizontalGreyScrollExample />,
+            },
+            {
+                path: "horizontal-grey-scroll",
+                element: <VerticalGreyScrollExample />,
             },
             {
                 path: "horizontal-scrollable-gallery",

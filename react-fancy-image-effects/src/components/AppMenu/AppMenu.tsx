@@ -21,11 +21,23 @@ export const AppMenu = () => (
             </ListItemIcon>
             <ListItemText>Fade By Column</ListItemText>
         </ListItemButton>
+        <ListItemButton component={Link} to={'/vertical-grey-scroll'}>
+            <ListItemIcon>
+                <ImageIcon />
+            </ListItemIcon>
+            <ListItemText>Vertical Grey Scroll</ListItemText>
+        </ListItemButton>
+        <ListItemButton component={Link} to={'/horizontal-grey-scroll'}>
+            <ListItemIcon>
+                <ImageIcon />
+            </ListItemIcon>
+            <ListItemText>Horizontal Grey Scroll</ListItemText>
+        </ListItemButton>
         <ListItemButton component={Link} to={'/horizontal-scrollable-gallery'}>
             <ListItemIcon>
                 <CollectionsIcon />
             </ListItemIcon>
-            <ListItemText>Horizontal Gall</ListItemText>
+            <ListItemText>Horizontal Gallery</ListItemText>
         </ListItemButton>
     </List>
 );
