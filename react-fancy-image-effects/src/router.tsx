@@ -7,6 +7,7 @@ import {
     HorizontalScrollableGallery,
     HorizontalGreyScrollExample,
     VerticalGreyScrollExample,
+    Grey2ColorExample,
 } from './pages';
 
 export const router = createBrowserRouter([
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             {
                 path: "horizontal-grey-scroll",
                 element: <HorizontalGreyScrollExample />,
+            },
+            {
+                path: 'grey-2-color',
+                element: <Grey2ColorExample />,
             },
             {
                 path: "horizontal-grey-scroll",

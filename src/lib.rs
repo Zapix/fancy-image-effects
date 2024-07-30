@@ -34,6 +34,7 @@ pub enum ImageShader {
     ColFade,
     VerticalGreyScroll,
     HorizontalGreyScroll,
+    Grey2Color,
 }
 
 #[wasm_bindgen] struct Application {
@@ -63,6 +64,7 @@ fn get_shader(image_shader: ImageShader) -> Cow<'static, str> {
         ImageShader::ColFade => Cow::Borrowed(include_str!("col-fade.wgsl")),
         ImageShader::VerticalGreyScroll => Cow::Borrowed(include_str!("vertical-grey-scroll.wgsl")),
         ImageShader::HorizontalGreyScroll => Cow::Borrowed(include_str!("horizontal-grey-scroll.wgsl")),
+        ImageShader::Grey2Color => Cow::Borrowed(include_str!("grey-2-color.wgsl")),
     }
 }
 
