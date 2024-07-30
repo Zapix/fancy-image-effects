@@ -33,6 +33,12 @@ export const AppMenu = () => (
             </ListItemIcon>
             <ListItemText>Horizontal Grey Scroll</ListItemText>
         </ListItemButton>
+        <ListItemButton component={Link} to={'/grey-2-color'}>
+            <ListItemIcon>
+                <ImageIcon />
+            </ListItemIcon>
+            <ListItemText>Grey To Color</ListItemText>
+        </ListItemButton>
         <ListItemButton component={Link} to={'/horizontal-scrollable-gallery'}>
             <ListItemIcon>
                 <CollectionsIcon />
