@@ -84,7 +84,7 @@ impl Application {
             .unwrap()
             .dyn_into::<HtmlCanvasElement>()
             .expect("Can not create canvas");
-        let style_string = format!("width: {}px; height: {}px", width, height);
+        let style_string = String::from("width: 100%; height: 100%");
         canvas
             .set_attribute("style", &style_string.as_str())
             .unwrap();
@@ -170,8 +170,8 @@ impl Application {
         let (image_width, image_height)= image.dimensions();
         let image_rgba = image.to_rgba8();
         let texture_size = wgpu::Extent3d {
-            width: width,
-            height: height,
+            width: image_width,
+            height: image_height,
             depth_or_array_layers: 1,
         };
         let diffuse_texture = device.create_texture(

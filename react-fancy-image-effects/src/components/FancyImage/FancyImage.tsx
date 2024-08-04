@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Box } from '@mui/material';
 
 import {Application, ImageShader} from 'fancy-image-effects';
 
@@ -82,6 +83,15 @@ export function FancyImage(props: FancyImageProps) {
 
     const { width, height } = props;
     return (
-        <div ref={ref} style={{ width, height }} />
+        <Box
+            ref={ref}
+            sx={{
+                maxWidth: width,
+                maxHeight: height,
+                width: '100%',
+                height: '100%',
+                aspectRatio: width / height,
+            }}
+        />
     );
 }
