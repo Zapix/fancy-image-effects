@@ -45,5 +45,11 @@ export const AppMenu = () => (
             </ListItemIcon>
             <ListItemText>Horizontal Gallery</ListItemText>
         </ListItemButton>
+        <ListItemButton component={Link} to={'/vertical-scrollable-gallery'}>
+            <ListItemIcon>
+                <CollectionsIcon />
+            </ListItemIcon>
+            <ListItemText>Vertical Gallery</ListItemText>
+        </ListItemButton>
     </List>
 );

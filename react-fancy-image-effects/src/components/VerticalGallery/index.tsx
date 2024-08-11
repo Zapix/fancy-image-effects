@@ -1,0 +1,1 @@
+export { VerticalGallery } from './VerticalGallery';
