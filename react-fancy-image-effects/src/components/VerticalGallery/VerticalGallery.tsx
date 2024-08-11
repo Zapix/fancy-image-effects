@@ -36,11 +36,13 @@ export const VerticalGallery = ({ images, size }: VerticalGalleryProps) => {
                 p: 2,
             }}
         >
+            <Box sx={{ height: 10 }} />
             {mounted && containerRef.current ? (
                 images.map((image) => (
                     <ImageItem key={image} image={image} size={size} container={containerRef.current} />
                 ))
             ) : null}
+            <Box sx={{ height: 10 }} />
         </Box>
     );
 };
