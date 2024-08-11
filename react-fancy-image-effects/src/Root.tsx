@@ -7,14 +7,12 @@ import { AppMenu } from "./components";
 
 export const Root = () => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column',  height: '100%' }}>
             <CssBaseline />
             <Layout
                 renderMenu={AppMenu}
             >
-                <Box sx={{ grow: 1 }}>
-                    <Outlet />
-                </Box>
+                <Outlet />
             </Layout>
         </Box>
     );

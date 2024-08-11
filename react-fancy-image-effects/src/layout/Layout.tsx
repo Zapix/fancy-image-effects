@@ -24,6 +24,9 @@ export const Layout = ({ children, renderMenu  }: LayoutProps) => {
     return (
         <Box
             sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100vh',
                 marginLeft: {
                     xs: 0,
                     md: `${DRAWER_WIDTH}px`
@@ -73,7 +76,19 @@ export const Layout = ({ children, renderMenu  }: LayoutProps) => {
             >
                 {drawer}
             </Drawer>
-            {children}
+            <Box sx={{
+                flexGrow: 1,
+                minHeight: 0,
+            }}>
+                <Box
+                    sx={{
+                        height: '100%',
+                        overflow: 'auto',
+                    }}
+                >
+                    {children}
+                </Box>
+            </Box>
         </Box>
     );
 };
