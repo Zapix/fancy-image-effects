@@ -1,11 +1,15 @@
 import * as React from "react";
 import { RouterProvider } from 'react-router-dom';
+import { ThemeProvider} from '@mui/material';
 
+import { theme } from './common/theme';
 import { router } from './router'
 
 const App = () => {
     return (
-        <RouterProvider router={router} />
+        <ThemeProvider theme={theme}>
+            <RouterProvider router={router} />
+        </ThemeProvider>
     );
 }
 
