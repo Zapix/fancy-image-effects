@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {Box, Slider} from '@mui/material';
-import { FancyImage } from '../../components/FancyImage';
+import { FancyImage, ImageShader } from 'react-fancy-image-effects';
 
 import image1 from '../../../images/img_5300.jpg';
 import image2 from '../../../images/IMG_5301.jpg';
 import image3 from '../../../images/IMG_5302.jpg';
 import image4 from '../../../images/IMG_5303.jpg';
 import image5 from '../../../images/IMG_5304.jpg';
-import {ImageShader} from "fancy-image-effects";
 
 const WIDTH= 512;
 const HEIGHT = 512;

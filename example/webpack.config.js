@@ -28,7 +28,11 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      'react': path.resolve(path.join(__dirname, './node_modules/react')),
+      'react-dom': path.resolve(path.join(__dirname, './node_modules/react-dom')),
+    },
   },
   mode: "development",
   plugins: [

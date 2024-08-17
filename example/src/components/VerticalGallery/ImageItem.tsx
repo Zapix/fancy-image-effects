@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
 
-import { ImageShader } from 'fancy-image-effects';
-
-import { FancyImage } from "../FancyImage";
+import { FancyImage, ImageShader } from 'react-fancy-image-effects';
 import { Size } from "../../common/types";
 
 

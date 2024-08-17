@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { Box } from '@mui/material';
+import { FancyImage, ImageShader } from 'react-fancy-image-effects';
 
-import { FancyImage } from '../FancyImage';
-import { ImageShader } from 'fancy-image-effects';
-
-import {Size} from "./types";
-import {FaceRetouchingNaturalSharp} from "@mui/icons-material";
+import {Size} from "../../common/types";
 
 export type ImageItemProps = {
     debug?: boolean;
