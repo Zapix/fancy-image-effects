@@ -1,1 +1,0 @@
-export { Grey2ColorExample } from './Grey2ColorExample';

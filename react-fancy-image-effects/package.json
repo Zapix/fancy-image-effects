@@ -1,13 +1,15 @@
 {
-  "name": "create-wasm-app",
+  "name": "react-fancy-image-effects",
   "version": "0.1.0",
   "description": "React component for fancy image effects build with wgpu on rust",
-  "main": "index.tsx",
+  "main": "dist/cjs/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "create-wasm-app": ".bin/create-wasm-app.js"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "npm run clear && rollup -c",
+    "clear": "rm -rf dist",
     "start": "webpack-dev-server"
   },
   "repository": {
@@ -18,7 +20,7 @@
     "webassembly",
     "wasm",
     "rust",
-    "webpack"
+    "rollup"
   ],
   "author": "Aleksandr Aibulatov <zap.aibulatov@gmail.com>",
   "license": "(MIT OR Apache-2.0)",
@@ -26,30 +28,30 @@
     "url": "https://github.com/rustwasm/create-wasm-app/issues"
   },
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
-  "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@fontsource/roboto": "^5.0.13",
-    "@mui/icons-material": "^5.15.20",
-    "@mui/material": "^5.15.20",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
-    "fancy-image-effects": "file:../pkg",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router": "^6.24.0",
-    "react-router-dom": "^6.24.0",
-    "styled-components": "^6.1.11",
-    "typescript": "^5.3.3"
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "fancy-image-effects": "file:../pkg"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "copy-webpack-plugin": "^5.0.0",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@rollup/plugin-wasm": "^6.2.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "file-loader": "^6.2.0",
     "hello-wasm-pack": "^0.1.0",
+    "rollup": "^4.20.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "ts-loader": "^9.5.1",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "typescript": "^5.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "fancy-image-effects": "file:../pkg"
   }
 }

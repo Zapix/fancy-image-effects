@@ -1,1 +1,0 @@
-export { HorizontalScrollableGallery } from './HorizontalScrollableGallery';
