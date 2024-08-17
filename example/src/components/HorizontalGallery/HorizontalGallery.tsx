@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { Box } from '@mui/material'
-import { Size } from './types';
+import { Size } from '../../common/types';
 
 import { ImageItem } from './ImageItem';
-import {useCallback, useEffect} from "react";
+import {useCallback } from "react";
 
 export type HorizontalGalleryProps = {
     images: string[],

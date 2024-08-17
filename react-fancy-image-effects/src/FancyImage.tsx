@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { Box } from '@mui/material';
-
+import { useRef, useEffect }  from 'react'
 import {Application, ImageShader} from 'fancy-image-effects';
 
 export type FancyImageProps = {
@@ -13,12 +11,12 @@ export type FancyImageProps = {
 };
 
 export function FancyImage(props: FancyImageProps) {
-    const prevPropsRef = React.useRef<FancyImageProps | null>(null);
-    const ref = React.useRef<HTMLDivElement | null>(null);
-    const applicationRef = React.useRef<Application | null>(null);
-    const frameRef = React.useRef<number | null>();
+    const prevPropsRef = useRef<FancyImageProps | null>(null);
+    const ref = useRef<HTMLDivElement | null>(null);
+    const applicationRef = useRef<Application | null>(null);
+    const frameRef = useRef<number | null>();
 
-    React.useEffect(() => {
+    useEffect(() => {
         const { current } = ref;
         if (current !== null) {
             const { src, shader, reversed , value} = props;
@@ -29,7 +27,7 @@ export function FancyImage(props: FancyImageProps) {
         }
     }, []);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const { current: prevProps } = prevPropsRef;
         const { current: application }  = applicationRef;
         if (prevProps === null) {
@@ -66,7 +64,7 @@ export function FancyImage(props: FancyImageProps) {
         prevPropsRef.current = props;
     }, [props]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         frameRef.current = requestAnimationFrame(() => {
             let { current: application } = applicationRef;
             if (application !== null) {
@@ -83,9 +81,9 @@ export function FancyImage(props: FancyImageProps) {
 
     const { width, height } = props;
     return (
-        <Box
+        <div
             ref={ref}
-            sx={{
+            style={{
                 maxWidth: width,
                 maxHeight: height,
                 width: '100%',

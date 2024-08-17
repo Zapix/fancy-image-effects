@@ -1,14 +1,11 @@
 {
-  "include": ["src/**/*"],
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./dist/",
     "noImplicitAny": true,
+    "module": "NodeNext",
     "target": "es2015",
     "jsx": "react-jsx",
     "allowJs": true,
-    "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "emitDeclarationOnly": true,
-    "declaration": true,
   }
 }
